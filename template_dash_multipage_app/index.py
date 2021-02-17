@@ -1,6 +1,6 @@
 """
 The index of the web app that links all the individual pages.
-This script defines the navigation on the top bar of the web app.
+This script defines the navigation on the top bar of the web dash app.
 The requirement is to add .py files into the pages folder.
 There should always be a home.py + (other optional pages) and the link to
 home is set to "/"
@@ -13,7 +13,8 @@ import dash_html_components as html
 from dash.dependencies import Input, Output, State
 
 # import all pages in the app
-from app import app, app_title
+from app import app
+from app import app_title
 from pages import *
 from pages.__init__ import __all__ as list_of_pages
 
@@ -82,3 +83,5 @@ def display_page(pathname):
 
 if __name__ == "__main__":
     app.run_server(host="127.0.0.1", debug=True)
+
+    

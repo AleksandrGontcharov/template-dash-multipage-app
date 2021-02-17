@@ -1,8 +1,8 @@
 [tool.poetry]
 name = "template-dash-multipage-app"
 version = "0.1.0"
-description = ""
-readme = "REAME.md"
+description = "Ultimate way to create a web app"
+readme = "README.md"
 authors = ["Aleksandr Gontcharov <alexgoncharov@gmail.com>"]
 
 [tool.poetry.dependencies]

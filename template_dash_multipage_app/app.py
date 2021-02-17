@@ -1,11 +1,7 @@
 """
-The index of the web app that links all the individual pages.
-This script defines the navigation on the top bar of the web app.
-The requirement is to add .py files into the pages folder.
-There should always be a home.py + (other optional pages) and the link to
-home is set to "/"
-
+This file 
 """
+
 import dash
 import dash_bootstrap_components as dbc
 
@@ -23,3 +19,5 @@ app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 # The title of the app that appears on the browser tab
 app.config.suppress_callback_exceptions = True
 app.title = app_title
+
+
