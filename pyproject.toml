@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "template-dash-multipage-app"
+version = "0.1.0"
+description = ""
+readme = "REAME.md"
+authors = ["Aleksandr Gontcharov <alexgoncharov@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+dash = "^1.19.0"
+dash-bootstrap-components = "^0.11.3"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
