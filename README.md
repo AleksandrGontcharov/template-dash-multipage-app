@@ -26,7 +26,7 @@ Use the package manager [poetry](https://python-poetry.org/) to install this pro
 # Clone the repository
 git clone git@github.com:Machine-Learning-Academy-of-Sciences/template-dash-multipage-app.git
 # cd into the source code directory
-cd template-dash-multipage-app\template_dash_multipage_app
+cd template-dash-multipage-app\src
 # Launch the virtualenv or create it if it doesn't exist
 poetry shell
 # install all requirements if they need to be installed
@@ -39,7 +39,7 @@ python index.py
 
 To create a website or web app from scratch:
 ### 1. Create a new repository for your web app
-* Creating a new GitHub repository using the GitHub web interface, and [use this repository as a template.](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template)
+* Creating a new GitHub repository with name `name-of-your-github-repo` using the GitHub web interface, and [use this repository as a template.](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template)
 * Clone the new repository locally onto your machine
 
 ### 2. Update web app name and poetry files
@@ -58,13 +58,14 @@ authors = ...
 poetry shell
 poetry update
 ```
-### 4. Update the code in the app
-* rename the folder `template_dash_multipage_app` to `name-of-your-github-repo`
+### 4. Update the code of the app in the `src` folder
 * Open `app.py` and rename the `app_title` and adjust the theme as desired.
 * As you are building your app, you can see it in your browser by running `python index.py`, and ctrl+click on the link in your terminal.
 * Start editing the files in the `pages/` directory. You can delete or make duplicates of the files and create your web app as needed. Watch out for errors and limitations, for example, the callbacks and ids should be unique across the app, but if such an error comes up, then it should be self-explanatory how to fix.
 
-5. Dockerize your app for deployment
+### 5. Dockerize your app for deployment
+
+**Note:** *These instructions do not include how to create a production-grade WSGI server. TODO: update these instructions for production.*
 
 Once the app is complete and functions as desired, it can now be packaged into a docker image so it can be deployed on any number of cloud platforms.
 
@@ -72,7 +73,7 @@ Once the app is complete and functions as desired, it can now be packaged into a
 * `CMD ["name-of-your-github-repo/index.py"]` 
   
 * In order to run the server from the Docker container, we have to change the last line in index.py as follows and save the file
-* `app.run_server(host='0.0.0.0', port=80, debug=True)`
+* `app.run_server(host='0.0.0.0', port=80, debug=False)`
 
  Build the docker image by running this command from the parent folder containg `Dockerfile`
 * `docker build -t name-of-your-github-repo .`
