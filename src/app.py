@@ -10,7 +10,7 @@ import dash_bootstrap_components as dbc
 ###########################################
 
 # The title of the App
-app_title = "MLAS Multi-Page Web App"  # Title of the app - appears as the Logo, and the title on the tab of the browser
+app_title = "My Multi-Page Web App"  # Title of the app - appears as the Logo, and the title on the tab of the browser
 # Set the theme of the app CERULEAN, COSMO, CYBORG, DARKLY, FLATLY, JOURNAL, LITERA, LUMEN, LUX, MATERIA, MINTY, PULSE, SANDSTONE, SIMPLEX, SKETCHY, SLATE, SOLAR, SPACELAB, SUPERHERO, UNITED, YETI
 external_stylesheets = [dbc.themes.YETI]
 ###########################################
