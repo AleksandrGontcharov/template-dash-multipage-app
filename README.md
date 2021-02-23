@@ -65,36 +65,35 @@ poetry update
 
 ### 5. Dockerize your app for deployment
 
-**Note:** *These instructions do not include how to create a production-grade WSGI server. TODO: update these instructions for production.*
-
 Once the app is complete and functions as desired, it can now be packaged into a docker image so it can be deployed on any number of cloud platforms.
-
-* edit the `Dockerfile` by editing the relative path to your `index.py` file. Open the `Dockerfile` and edit this line:
-* `CMD ["name-of-your-github-repo/index.py"]` 
-  
-* In order to run the server from the Docker container, we have to change the last line in index.py as follows and save the file
-* `app.run_server(host='0.0.0.0', port=80, debug=False)`
 
  Build the docker image by running this command from the parent folder containg `Dockerfile`
 * `docker build -t name-of-your-github-repo .`
   * This builds an image with the name `name-of-your-github-repo`. Once it is done,  you can run `docker images` and you should see it listed there.
 
 Run your created Docker image with
-* `docker run -it --rm -p 8080:80 template-dash-multipage-app`
+* `docker run -it --rm -p 8000:80 name-of-your-github-repo`
 
 Now you should see a message like this
 
-You can navigate to http://localhost:8080/ and you should see your app running.
+You can navigate to http://localhost:8000/ and you should see your app running.
 
 This image can now be pushed to a private container registry and hosted on a cloud provider. The instructions for this step should be found in the cloud provider's documentation. 
 
 For reference, here is some documentation for
 Azure: https://code.visualstudio.com/docs/containers/app-service
   
+For Azure we can push the image to the Azure registry as follows [See the full insturctions here.(https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-docker-cli):
+
+Tag the image
+* ` docker tag name-of-your-github-repo mlascontainers.azurecr.io/name-of-your-github-repo`
+
+Ensure that you are logged in through `az` ([see instructions here](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-docker-cli)) then push the image
+* `docker push mlascontainers.azurecr.io/name-of-your-github-repo`
 
 ## Authors and acknowledgment
 
-Created by Alekandr Gontcharov with support by Jason Carayanniotis.
+Created by Aleksandr Gontcharov <alexgoncharov@gmail.com>.
 
 ## Contributing
 Pull requests are welcome. 
