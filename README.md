@@ -23,9 +23,7 @@ The app uses
 Use the package manager [poetry](https://python-poetry.org/) to install this project.
 
 ```bash
-# Clone the repository
-git clone git@github.com:Machine-Learning-Academy-of-Sciences/template-dash-multipage-app.git
-# cd into the source code directory
+# Clone the repository and cd into the source code directory
 cd template-dash-multipage-app\src
 # Launch the virtualenv or create it if it doesn't exist
 poetry shell
