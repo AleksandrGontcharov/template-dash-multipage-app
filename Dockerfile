@@ -1,17 +1,14 @@
 FROM python:3.8-slim
+
 COPY . /app
 WORKDIR /app
 
-RUN echo '******* Installing POETRY ********'
 RUN pip install poetry
-
-RUN echo '******* Creating requirements.txt file from Poetry********'
 RUN poetry export --without-hashes --dev -f requirements.txt -o requirements.txt
-
-RUN echo '******* Installing requirements.txt********'
 RUN pip install -r requirements.txt
 ADD . /app/
+RUN pip install gunicorn
+EXPOSE 80
+WORKDIR /app/src
 
-RUN echo '******* Change the entrypoint .py file to app.run_server(host='0.0.0.0', port=80, debug=True)********'
-ENTRYPOINT [ "python" ]
-CMD ["template_dash_multipage_app/index.py"]
+ENTRYPOINT gunicorn -w 4 -b :80 wsgi:app
