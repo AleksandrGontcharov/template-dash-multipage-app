@@ -11,4 +11,4 @@ RUN pip install gunicorn
 EXPOSE 80
 WORKDIR /app/src
 
-ENTRYPOINT gunicorn -w 4 -b :80 wsgi:app
+ENTRYPOINT ["gunicorn", "-w", "4", "-b", ":80", "wsgi:app"]

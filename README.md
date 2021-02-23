@@ -78,6 +78,18 @@ You can navigate to http://localhost:8000/ and you should see your app running.
 
 This image can now be pushed to a private container registry and hosted on a cloud provider. The instructions for this step should be found in the cloud provider's documentation. 
 
+
+### 6. Azure Deployment
+
+The main thing to remember is that for Azure the port is 80 and the Dockerfile should have 
+
+```bash
+EXPOSE 80
+WORKDIR /app/src
+
+ENTRYPOINT ["gunicorn", "-w", "4", "-b", ":80", "wsgi:app"]
+```
+
 For reference, here is some documentation for
 Azure: https://code.visualstudio.com/docs/containers/app-service
   
@@ -89,6 +101,37 @@ Tag the image
 Ensure that you are logged in through `az` ([see instructions here](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-docker-cli)) then push the image
 * `docker push mlascontainers.azurecr.io/name-of-your-github-repo`
 
+### 6. Heroku deployment
+
+The main thing to remember is that for some reason heroku doesn't allow you to have arguments for gunicorn other than in the format `gunicorn app:app`. So therefore, we can test the docker container locally with 
+
+For local development use:
+```bash
+EXPOSE 80
+WORKDIR /app/src
+
+ENTRYPOINT ["gunicorn", "-w", "4", "-b", ":80", "wsgi:app"]
+```
+For heroku deploymennt use:
+```bash
+EXPOSE 80
+WORKDIR /app/src
+
+ENTRYPOINT ["gunicorn", "wsgi:app"]
+```
+
+The manual deployment process can then be done as follows. After logging into heroku with [heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) and assuming that the Dockerfile is heroku deployment version, then the website can be updated automatically with the following to commands
+
+
+Push the changes to the heroku container registry
+```
+heroku container:push web --app=<name of app>
+```
+
+Release the changes to the live web app
+```
+heroku container:release web --app=<name of app>
+```
 ## Authors and acknowledgment
 
 Created by Aleksandr Gontcharov <alexgoncharov@gmail.com>.
