@@ -1,29 +1,38 @@
-import dash_html_components as html
-import dash_bootstrap_components as dbc
+from pathlib import Path
 
+import dash_bootstrap_components as dbc
+import dash_core_components as dcc
+import dash_html_components as html
 from app import app
 
-layout = html.Div([
-    dbc.Container([
-        dbc.Row([
-            dbc.Col(html.H1("Welcome to the Home Page", className="text-center")
-                    , className="mb-5 mt-5")
-        ]),
-        dbc.Row([
-            dbc.Col(html.H5(children='Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-                                     )
-                    , className="mb-4")
-            ]),
+##############################################################
+# Predefine styles
+##############################################################
 
-        dbc.Row([
-            dbc.Col(html.H5(children='Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, \
-                totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. \
-                Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. ')
-                    , className="mb-5")
-        ]),
+# defines a style to be applied to rows - padding between rows (vertical padding)
+padding_style = dict(padding="3rem 3rem", height="auto")
 
-    
-       
-    ])
+# defines a style to be applied to cards to remove border (can be border = "none")
+border_style = dict(padding="0.5rem 0rem", border="1")
 
+# defines a style to be applied to cards to remove border (can be border = "none")
+no_border_style = dict(padding="0.5rem 0rem", border="none")
+
+##############################################################
+# Load homepage content
+##############################################################
+
+# Using the newer Pathlib library to read the context of a text file :)
+markdown_content = (Path(__file__).parent / 'home_content.md').read_text()
+
+##############################################################
+# Layout
+##############################################################
+
+
+layout = dbc.Container([
+    dbc.Row([dbc.Col(
+        dbc.Card(dbc.CardBody(dcc.Markdown(markdown_content)), style=border_style, body=True,), xl=12,)],
+        style=padding_style,
+    )
 ])

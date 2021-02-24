@@ -8,52 +8,49 @@ from app import app
 # Predefine styles
 ##############################################################
 
-padding_style = dict(
-    padding="0.5rem 0rem", height="auto"
-)  # defines a style to be applied to rows - padding between rows (vertical padding)
+# defines a style to be applied to rows - padding between rows (vertical padding)
+padding_style = dict(padding="0.5rem 0rem", height="auto")
 
-border_style = dict(
-    padding="0.5rem 0rem", border="1"
-)  # defines a style to be applied to cards to remove border (can be border = "none")
+# defines a style to be applied to cards to remove border (can be border = "none")
+border_style = dict(padding="0.5rem 0rem", border="1")
 
-no_border_style = dict(
-    padding="0.5rem 0rem", border="none"  # border = "none"
-)  # defines a style to be applied to cards to remove border (can be border = "none")
+# defines a style to be applied to cards to remove border (can be border = "none")
+no_border_style = dict(padding="0.5rem 0rem", border="none")
 
 
 ##############################################################
 # Row 1 Content
 ##############################################################
 
-row_1_content = [
-    html.H4(
-        "Demonstration of a callback with Input from Text Box",
-        className="card-title",
-        style=dict(textAlign="center"),
-    ),
-    html.H6(
-        "Type something in the text box and press predict",
-        className="card-subtitle",
-        style=dict(textAlign="center"),
-    ),
-]
+row_1_content = [html.H4("Demonstration of a callback with Input from Text Box",
+                         className="card-title",
+                         style=dict(textAlign="center"),
+                         ),
+                 html.H6("Type something in the text box and press predict",
+                         className="card-subtitle",
+                         style=dict(textAlign="center"),
+                         ),
+                 ]
 
 
 ##############################################################
 # Row 2 Content
 ##############################################################
 
-row_2_1_textbox = [
-    dbc.Input(id="id-text-box", placeholder="Type something...", type="text"),
-]
+row_2_1_textbox = [dbc.Input(id="id-text-box",
+                             placeholder="Type something...",
+                             type="text"),
+                   ]
 
-row_2_2_button = [
-    dbc.Button("Predict", color="primary", id="id-button", type="text"),
-]
+row_2_2_button = [dbc.Button("Predict",
+                             color="primary",
+                             id="id-button",
+                             type="text"),
+                  ]
 
-row_2_3_output = [
-    html.H4(id="id-result", style={"vertical-align": "middle"}),
-]
+row_2_3_output = [html.H4(id="id-result",
+                          style={"vertical-align": "middle"}),
+                  ]
 
 
 ##############################################################
@@ -61,12 +58,20 @@ row_2_3_output = [
 ##############################################################
 
 
-@app.callback(
-    Output(component_id="id-result", component_property="children"),
-    [Input(component_id="id-button", component_property="n_clicks")],
-    State(component_id="id-text-box", component_property="value"),
-)
+@app.callback(Output("id-result", "children"),
+              [Input("id-button", "n_clicks")],
+              State("id-text-box", "value"),
+              )
 def predict(n, input_value):
+    """Write a docstring for this callback
+
+    Args:
+        n ([type]): [description]
+        input_value ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     # if not clicked yet then n = 0
     if n is None:
         return ""
@@ -86,47 +91,45 @@ def predict(n, input_value):
 # Layout
 ##############################################################
 
-layout = dbc.Container(
-    [
-        # Row 1
-        dbc.Row(
-            [dbc.Col(dbc.Card(row_1_content, style=border_style), xl=12)],
-            style=padding_style,
+layout = dbc.Container([
+    # Row 1
+    dbc.Row(
+        [dbc.Col(dbc.Card(row_1_content, style=border_style), xl=12)],
+        style=padding_style,
+    ),
+    # Row 3
+    dbc.Row([
+        dbc.Col(
+            dbc.Card(
+                dbc.CardBody(row_2_1_textbox),
+                style=border_style,
+                body=False,
+            ),
+            xl=5,
         ),
-        # Row 3
-        dbc.Row(
-            [
-                dbc.Col(
-                    dbc.Card(
-                        dbc.CardBody(row_2_1_textbox),
-                        style=border_style,
-                        body=False,
-                    ),
-                    xl=5,
-                ),
-                dbc.Col(
-                    dbc.Card(
-                        dbc.CardBody(row_2_2_button),
-                        className="card align-items-center",
-                        style=border_style,
-                        body=True,
-                    ),
-                    xl=2,
-                    align="center",
-                ),
-                dbc.Col(
-                    dbc.Card(
-                        row_2_3_output,
-                        className="card align-items-center",
-                        style=no_border_style,
-                        body=True,
-                    ),
-                    xl=5,
-                    align="center",
-                ),
-            ],
-            style=padding_style,
-            # align="center",
+        dbc.Col(
+            dbc.Card(
+                dbc.CardBody(row_2_2_button),
+                className="card align-items-center",
+                style=border_style,
+                body=True,
+            ),
+            xl=2,
+            align="center",
         ),
-    ]
+        dbc.Col(
+            dbc.Card(
+                row_2_3_output,
+                className="card align-items-center",
+                style=no_border_style,
+                body=True,
+            ),
+            xl=5,
+            align="center",
+        ),
+    ],
+        style=padding_style,
+        # align="center",
+    ),
+]
 )

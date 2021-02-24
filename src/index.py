@@ -22,14 +22,20 @@ from pages.__init__ import __all__ as list_of_pages
 # Set these parameters at the top
 ###########################################
 # Navbar Color
-navbar_color = "primary"  # can be one of many keywords (primary, light, dark, warning, secondary, success, danger, info, white) or a hex code
+# can be one of many keywords (primary, light, dark, warning, secondary, success, danger, info, white) or a hex code
+navbar_color = "primary"
 ###########################################
 
 
 def create_navbar_links(list_of_pages):
-    """
-    Generate a list of navbar page links. The output
-    of this function is used in the navbar
+    """Generate a list of navbar page links. The output
+       of this function is used in the navbar
+
+    Args:
+        list_of_pages ([type]): [description]
+
+    Returns:
+        [type]: [description]
     """
     navbar_links = []
     for page in list_of_pages:
@@ -38,42 +44,58 @@ def create_navbar_links(list_of_pages):
             # Capitalize the page title and remove underscores
             page_title = page.replace("_", " ").title()
             navbar_links.append(
-                dbc.NavItem(dbc.NavLink(page_title, href="/" + page, className="ml-2"))
+                dbc.NavItem(dbc.NavLink(
+                    page_title, href="/" + page, className="ml-2"))
             )
 
     return navbar_links
 
 
-navbar = dbc.NavbarSimple(
-    children=create_navbar_links(list_of_pages),
-    brand=app_title,
-    brand_href="/",
-    color=navbar_color,
-    dark=True,
-)
+navbar = dbc.NavbarSimple(children=create_navbar_links(list_of_pages),
+                          brand=app_title,
+                          brand_href="/",
+                          color=navbar_color,
+                          dark=True,
+                          )
 
 
 def toggle_navbar_collapse(n, is_open):
+    """Another template function for the navbar
+
+    Args:
+        n ([type]): [description]
+        is_open (bool): [description]
+
+    Returns:
+        [type]: [description]
+    """
     if n:
         return not is_open
     return is_open
 
 
 for i in [2]:
-    app.callback(
-        Output(f"navbar-collapse{i}", "is_open"),
-        [Input(f"navbar-toggler{i}", "n_clicks")],
-        [State(f"navbar-collapse{i}", "is_open")],
-    )(toggle_navbar_collapse)
+    app.callback(Output(f"navbar-collapse{i}", "is_open"),
+                 [Input(f"navbar-toggler{i}", "n_clicks")],
+                 [State(f"navbar-collapse{i}", "is_open")],
+                 )(toggle_navbar_collapse)
 
 # embedding the navigation bar
-app.layout = html.Div(
-    [dcc.Location(id="url", refresh=False), navbar, html.Div(id="page-content")]
-)
+app.layout = html.Div([dcc.Location(id="url", refresh=False), navbar,
+                       html.Div(id="page-content")]
+                      )
 
 
 @app.callback(Output("page-content", "children"), [Input("url", "pathname")])
 def display_page(pathname):
+    """This function loads the layouts of the webapps in the pages folder.
+
+    Args:
+        pathname ([type]): [description]
+
+    Returns:
+        [type]: [description]
+    """
     try:
         return globals()[pathname[1:]].layout
     except:
@@ -83,4 +105,3 @@ def display_page(pathname):
 
 if __name__ == "__main__":
     app.run_server(host='127.0.0.1', port=8000, debug=True)
-

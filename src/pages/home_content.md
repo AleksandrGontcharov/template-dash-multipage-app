@@ -101,7 +101,7 @@ Tag the image
 Ensure that you are logged in through `az` ([see instructions here](https://docs.microsoft.com/en-us/azure/container-registry/container-registry-get-started-docker-cli)) then push the image
 * `docker push mlascontainers.azurecr.io/name-of-your-github-repo`
 
-### 7. Heroku deployment
+### 6. Heroku deployment
 
 The main thing to remember is that for some reason heroku doesn't allow you to have arguments for gunicorn other than in the format `gunicorn app:app`. So therefore, we can test the docker container locally with 
 
