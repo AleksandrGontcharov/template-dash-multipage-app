@@ -19,7 +19,7 @@ app_title = "Aleksandr Gontcharov Multi-Page Web App"
 #               PULSE, SANDSTONE, SKETCHY, SLATE, SPACELAB, UNITED
 # Themes I like: COSMO, LUMEN, LUX, MATERIA,  YETI
 ##############################################################
-external_stylesheets = [dbc.themes.LUX]
+external_stylesheets = [dbc.themes.COSMO]
 
 # Define the app
 app = dash.Dash(__name__, external_stylesheets=external_stylesheets)

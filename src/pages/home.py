@@ -10,20 +10,20 @@ from app import app
 ##############################################################
 
 # defines a style to be applied to rows - padding between rows (vertical padding)
-padding_style = dict(padding="3rem 3rem", height="auto")
+padding_style = dict(padding="0.5rem 0.5rem", height="auto")
 
 # defines a style to be applied to cards to remove border (can be border = "none")
-border_style = dict(padding="0.5rem 0rem", border="1")
+border_style = dict(padding="0rem 0rem", border="1")
 
 # defines a style to be applied to cards to remove border (can be border = "none")
-no_border_style = dict(padding="0.5rem 0rem", border="none")
+no_border_style = dict(padding="0rem 0rem", border="none")
 
 ##############################################################
 # Load homepage content
 ##############################################################
 
 # Using the newer Pathlib library to read the context of a text file :)
-markdown_content = (Path(__file__).parent / 'home_content.md').read_text()
+markdown_content = (Path(__file__).parent / 'home.md').read_text()
 
 ##############################################################
 # Layout
@@ -32,7 +32,17 @@ markdown_content = (Path(__file__).parent / 'home_content.md').read_text()
 
 layout = dbc.Container([
     dbc.Row([dbc.Col(
-        dbc.Card(dbc.CardBody(dcc.Markdown(markdown_content)), style=border_style, body=True,), xl=12,)],
-        style=padding_style,
-    )
+        dbc.Card(dbc.CardBody(html.Div([dcc.Markdown(markdown_content), ],
+                                       className="h-tag",
+                                       style={'marginTop': '1em',
+                                              'marginBottom': '1em',
+                                              'marginLeft': '1em',
+                                              'marginRight': '1em'})),
+                 style=border_style, body=True,), xl=12,)],
+            style=padding_style,
+            )
 ])
+
+# layout = html.Div([dcc.Markdown(markdown_content),
+#                    ],
+#                   style={'lineHeight': '50px'})
