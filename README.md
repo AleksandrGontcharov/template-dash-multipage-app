@@ -2,6 +2,13 @@
 
 This repository will allow you to make a web app quickly and easily. No more wasting your time with HTTP port routing, Flask, Gunicorn, or any of the other rabbit holes when all you want to do is to create a responsive design website that can be customly themed in one line of code, have virtually any layout, and may contain buttons, dropdowns, forms or any other element connected to Python functions. At the end, all you want to do is put this website on the internet.
 
+
+
+<p align="center">
+<img src="src/assets/create_website.gif">
+</p>
+
+
 ## Features
 
 * Contains several example pages with reference code on how to structure the layout of your page, create `callbacks` to add functionality and interactivity
